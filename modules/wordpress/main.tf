@@ -15,7 +15,6 @@ resource "aws_instance" "wordpress-ec2" {
     vpc_security_group_ids = [aws_security_group.wordpress_sg.id]
 
     user_data = file("${path.module}/install_wordpress.sh")
-  
 }
 
   # This resource creates security group
