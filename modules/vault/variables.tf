@@ -13,3 +13,7 @@ variable "instance_type" {
 variable "subnet_id" {
   type = string
 }
+
+variable "vpc_id" {
+     type = string 
+}

@@ -3,11 +3,12 @@
 # Install Apache, PHP, MySQL, and WordPress
 # Download WordPress from wordpress.org
 # Use secrets fetched from Vault (DB user/pass)
-resource "aws_instance" "wordpress-ec2" {
+resource "aws_instance" "wordpress_ec2" {
     ami = var.ami_id
     instance_type = var.instance_type
     subnet_id = var.subnet_id
     associate_public_ip_address = true #Enables a public IP so it can be connected from the internet
+    key_name = "fresh-server-key"
     tags = {
     Name = var.instance_name
     }
@@ -21,6 +22,7 @@ resource "aws_instance" "wordpress-ec2" {
   resource "aws_security_group" "wordpress_sg" {
   name        = "wordpress-sg"
   description = "Allow HTTP (PORT 80) and SSH (PORT 22) for WordPress"
+  vpc_id      = var.vpc_id  # ← pass in the VPC ID from your main module
 
   ingress {
     description = "Allow SSH"

@@ -43,3 +43,4 @@ variable "vault_ami_id" {
 variable "vault_instance_type" {
   type = string
 }
+
