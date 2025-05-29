@@ -31,3 +31,15 @@ variable "public_subnet_cidr" {
 variable "availability_zone" {
     type = string
 }
+
+variable "vault_instance_name" {
+  type = string
+}
+
+variable "vault_ami_id" {
+  type = string
+}
+
+variable "vault_instance_type" {
+  type = string
+}
