@@ -1,40 +1,34 @@
-# Deploy WordPress on AWS using Terraform and Vault
+# WordPress Deployment on AWS with Terraform and Vault
 
-This project provisions a production-like WordPress environment on AWS using Terraform. The infrastructure includes a custom VPC, EC2 instances, and HashiCorp Vault for secure secret management. All infrastructure components are fully automated through code.
+This project provisions a basic, production-style WordPress environment on AWS using Terraform. It also integrates HashiCorp Vault to securely manage sensitive information such as database credentials.
 
----
+## 🧱 Project Overview
 
-## Architecture Overview
+The goal is to demonstrate core Infrastructure as Code (IaC) principles using Terraform, while applying secure secret management practices with Vault. The setup includes:
 
-- **VPC** with public and (optional) private subnets
-- **EC2 instance** hosting WordPress (Apache, PHP, MySQL or RDS backend)
-- **Vault EC2 instance** used to store and retrieve secrets securely
-- **Route 53** domain pointing to WordPress application
-- **Secrets Management** handled via Vault (e.g., DB credentials, admin passwords)
+- A custom VPC with public subnets
+- An EC2 instance hosting WordPress (Apache, PHP, MySQL)
+- A Vault EC2 instance used to store and retrieve secrets
+- A public domain (via Route 53) pointing to the WordPress server
+- Secrets (DB credentials, admin passwords) handled exclusively via Vault
 
-Optional (bonus) components include:
-- Auto Scaling Group (ASG) for WordPress
-- Packer-built AMIs
-- CI/CD pipeline for infrastructure deployment
+## 🗂️ Project Structure
 
----
+| File/Module         | Description                                      |
+|---------------------|--------------------------------------------------|
+| `provider.tf`       | AWS provider configuration                      |
+| `vpc/`              | Terraform module for VPC, subnets, gateways     |
+| `wordpress/`        | Terraform module for the EC2 WordPress instance |
+| `vault/`            | Terraform module for the Vault instance         |
+| `variables.tf`      | Input variables for configuration               |
+| `outputs.tf`        | Useful output values (IP, domain, etc.)         |
+| `main.tf`           | Root configuration that ties all modules        |
 
-## Components
+## 🔐 Vault Usage
 
-| Component     | Description                                  |
-|---------------|----------------------------------------------|
-| `provider.tf` | AWS provider setup                           |
-| `vpc.tf`      | Custom VPC, subnets, route tables, gateways  |
-| `wordpress.tf`| EC2 instance + user_data for WordPress setup |
-| `vault.tf`    | Vault instance setup + initialization script |
-| `variables.tf`| Input variables                              |
-| `outputs.tf`  | Public IPs, domain name outputs              |
+Vault is deployed on a separate EC2 instance and is used to store secrets such as:
 
----
+- WordPress DB credentials
+- Admin login credentials
 
-## Usage
-
-Ensure your AWS CLI is configured with appropriate IAM permissions:
-
-```bash
-aws configure
+Secrets are injected into the WordPress EC2 setup using Vault CLI or templated `user_data` scripts.
