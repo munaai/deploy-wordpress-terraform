@@ -12,17 +12,37 @@ The goal is to demonstrate core Infrastructure as Code (IaC) principles using Te
 - A public domain (via Route 53) pointing to the WordPress server
 - Secrets (DB credentials, admin passwords) handled exclusively via Vault
 
-## 🗂️ Project Structure
+## 📁 Project Structure
 
-| File/Module         | Description                                      |
-|---------------------|--------------------------------------------------|
-| `provider.tf`       | AWS provider configuration                      |
-| `vpc/`              | Terraform module for VPC, subnets, gateways     |
-| `wordpress/`        | Terraform module for the EC2 WordPress instance |
-| `vault/`            | Terraform module for the Vault instance         |
-| `variables.tf`      | Input variables for configuration               |
-| `outputs.tf`        | Useful output values (IP, domain, etc.)         |
-| `main.tf`           | Root configuration that ties all modules        |
+```plaintext
+.
+├── .terraform/                         # Terraform working directory (auto-generated)
+├── modules/
+│   ├── vault/
+│   │   ├── install_vault.sh           # Vault init/setup script
+│   │   ├── main.tf
+│   │   ├── outputs.tf
+│   │   └── variables.tf
+│   ├── vpc/
+│   │   ├── main.tf
+│   │   ├── outputs.tf
+│   │   └── variables.tf
+│   └── wordpress/
+│       ├── install_wordpress.sh       # WordPress EC2 bootstrap script
+│       ├── main.tf
+│       ├── outputs.tf
+│       └── variables.tf
+├── .gitignore
+├── .terraform.lock.hcl
+├── main.tf                            # Root module wiring all components together
+├── output.tf
+├── provider.tf
+├── variables.tf
+├── terraform.tfvars                   # Input values (not committed)
+├── terraform.tfstate                  # Local state file (not committed)
+├── terraform.tfstate.backup          # Backup of state (not committed)
+└── README.md
+
 
 ## 🔐 Vault Usage
 
