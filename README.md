@@ -2,7 +2,7 @@
 
 This project provisions a basic, production-style WordPress environment on AWS using Terraform. It also integrates HashiCorp Vault to securely manage sensitive information such as database credentials.
 
-## 🧱 Project Overview
+## Project Overview
 
 The goal is to demonstrate core Infrastructure as Code (IaC) principles using Terraform, while applying secure secret management practices with Vault. The setup includes:
 
@@ -12,7 +12,17 @@ The goal is to demonstrate core Infrastructure as Code (IaC) principles using Te
 - A public domain (via Route 53) pointing to the WordPress server
 - Secrets (DB credentials, admin passwords) handled exclusively via Vault
 
-## 📁 Project Structure
+
+## Vault Usage
+
+Vault is deployed on a separate EC2 instance and is used to store secrets such as:
+
+- WordPress DB credentials
+- Admin login credentials
+
+Secrets are injected into the WordPress EC2 setup using Vault CLI or templated `user_data` scripts.
+
+## Project Structure
 
 ```plaintext
 .
@@ -44,11 +54,3 @@ The goal is to demonstrate core Infrastructure as Code (IaC) principles using Te
 └── README.md
 
 
-## 🔐 Vault Usage
-
-Vault is deployed on a separate EC2 instance and is used to store secrets such as:
-
-- WordPress DB credentials
-- Admin login credentials
-
-Secrets are injected into the WordPress EC2 setup using Vault CLI or templated `user_data` scripts.
