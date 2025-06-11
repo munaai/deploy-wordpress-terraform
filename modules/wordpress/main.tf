@@ -1,8 +1,3 @@
-# Launch EC2 instance
-# Use user_data script to:
-# Install Apache, PHP, MySQL, and WordPress
-# Download WordPress from wordpress.org
-# Use secrets fetched from Vault (DB user/pass)
 resource "aws_instance" "wordpress_ec2" {
     ami = var.ami_id
     instance_type = var.instance_type
@@ -22,7 +17,7 @@ resource "aws_instance" "wordpress_ec2" {
   resource "aws_security_group" "wordpress_sg" {
   name        = "wordpress-sg"
   description = "Allow HTTP (PORT 80) and SSH (PORT 22) for WordPress"
-  vpc_id      = var.vpc_id  # ← pass in the VPC ID from your main module
+  vpc_id      = var.vpc_id  # ← pass in the VPC ID from the main module
 
   ingress {
     description = "Allow SSH"
