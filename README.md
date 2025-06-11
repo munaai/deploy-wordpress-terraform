@@ -26,7 +26,6 @@ Secrets are injected into the WordPress EC2 setup using Vault CLI or templated `
 
 ```plaintext
 .
-├── .terraform/                         # Terraform working directory (auto-generated)
 ├── modules/
 │   ├── vault/
 │   │   ├── install_vault.sh           # Vault init/setup script
@@ -42,15 +41,11 @@ Secrets are injected into the WordPress EC2 setup using Vault CLI or templated `
 │       ├── main.tf
 │       ├── outputs.tf
 │       └── variables.tf
-├── .gitignore
-├── .terraform.lock.hcl
-├── main.tf                            # Root module wiring all components together
+├── main.tf                            
 ├── output.tf
 ├── provider.tf
 ├── variables.tf
-├── terraform.tfvars                   # Input values (not committed)
-├── terraform.tfstate                  # Local state file (not committed)
-├── terraform.tfstate.backup          # Backup of state (not committed)
+├── terraform.tfvars                   
 └── README.md
 
 
