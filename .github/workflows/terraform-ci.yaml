@@ -32,13 +32,13 @@ jobs:
 
       - name: Terraform Validate (wordpress)
         run: |
-          cd wordpress
+          cd modules/wordpress
           terraform init -backend=false
           terraform validate
 
       - name: Terraform Validate (vpc)
         run: |
-          cd vpc
+          cd modules/vpc
           terraform init -backend=false
           terraform validate
 
