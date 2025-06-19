@@ -1,23 +1,23 @@
 resource "aws_instance" "wordpress_ec2" {
-    ami = var.ami_id
-    instance_type = var.instance_type
-    subnet_id = var.subnet_id
-    associate_public_ip_address = true #Enables a public IP so it can be connected from the internet
-    key_name = "fresh-server-key"
-    tags = {
+  ami                         = var.ami_id
+  instance_type               = var.instance_type
+  subnet_id                   = var.subnet_id
+  associate_public_ip_address = true #Enables a public IP so it can be connected from the internet
+  key_name                    = "fresh-server-key"
+  tags = {
     Name = var.instance_name
-    }
-    # The below connects the EC2 instance to the security group  — this ensures only the allowed traffic (SSH + HTTP) can reach the server.
-    vpc_security_group_ids = [aws_security_group.wordpress_sg.id]
+  }
+  # The below connects the EC2 instance to the security group  — this ensures only the allowed traffic (SSH + HTTP) can reach the server.
+  vpc_security_group_ids = [aws_security_group.wordpress_sg.id]
 
-    user_data = file("${path.module}/install_wordpress.sh")
+  user_data = file("${path.module}/install_wordpress.sh")
 }
 
-  # This resource creates security group
-  resource "aws_security_group" "wordpress_sg" {
+# This resource creates security group
+resource "aws_security_group" "wordpress_sg" {
   name        = "wordpress-sg"
   description = "Allow HTTP (PORT 80) and SSH (PORT 22) for WordPress"
-  vpc_id      = var.vpc_id  # ← pass in the VPC ID from the main module
+  vpc_id      = var.vpc_id # ← pass in the VPC ID from the main module
 
   ingress {
     description = "Allow SSH"

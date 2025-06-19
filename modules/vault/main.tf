@@ -5,11 +5,11 @@
 # In real-world production setups, Vault is always deployed separately from applications for both security and reliability.
 
 resource "aws_instance" "vault" {
-  ami                    = var.ami_id
-  instance_type          = var.instance_type
-  subnet_id              = var.subnet_id
+  ami                         = var.ami_id
+  instance_type               = var.instance_type
+  subnet_id                   = var.subnet_id
   associate_public_ip_address = true
-  key_name = "fresh-server-key"
+  key_name                    = "fresh-server-key"
 
   tags = {
     Name = var.instance_name

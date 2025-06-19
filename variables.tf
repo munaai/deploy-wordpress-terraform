@@ -1,7 +1,7 @@
 # Wordpress variables
 variable "wordpress_instance_type" {
-    type = string
-    description = "EC2 instance type for Wordpress server"
+  type        = string
+  description = "EC2 instance type for Wordpress server"
 }
 
 variable "wordpress_instance_name" {
@@ -15,21 +15,21 @@ variable "wordpress_ami_id" {
 }
 
 # VPC variables 
-  
+
 variable "vpc_cidr_block" {
-    type = string
+  type = string
 }
 
 variable "vpc_name" {
-    type = string
+  type = string
 }
 
 variable "public_subnet_cidr" {
-    type = string
+  type = string
 }
 
 variable "availability_zone" {
-    type = string
+  type = string
 }
 
 variable "vault_instance_name" {

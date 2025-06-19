@@ -1,15 +1,15 @@
 variable "vpc_cidr_block" {
-    type = string
+  type = string
 }
 
 variable "vpc_name" {
-    type = string
+  type = string
 }
 
 variable "public_subnet_cidr" {
-    type = string
+  type = string
 }
 
 variable "availability_zone" {
-    type = string
+  type = string
 }
