@@ -1,0 +1,44 @@
+name: Terraform Lint and Validate
+
+on: [push]
+
+jobs:
+  built:
+    runs-on: ubuntu latest
+
+    steps:
+      - name: checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up Terraform
+        uses: hashicorp/setup-terraform@v2
+        with:
+          terraform_version: 1.6.6
+
+      - name: Terraform Format Check (root)
+        run: terraform fmt -check -recursive
+
+      - name: Terraform Init (root)
+        run: terraform init
+
+      - name: Terraform Validate (root)
+        run: terraform validate
+
+      - name: Terraform Validate (modules/vault)
+        run: |
+          cd modules/vault
+          terraform init -backend=false
+          terraform validate
+
+      - name: Terraform Validate (wordpress)
+        run: |
+          cd wordpress
+          terraform init -backend=false
+          terraform validate
+
+      - name: Terraform Validate (vpc)
+        run: |
+          cd vpc
+          terraform init -backend=false
+          terraform validate
+
